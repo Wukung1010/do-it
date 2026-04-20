@@ -13,7 +13,7 @@
 
 用户想做一个前后端分离的全栈应用，核心是任务事项管理。PC Web 先做，移动端后续考虑。不需要用户系统，数据本地存储/单设备使用。
 
-技术栈已确定：前端 Vue3 + Vite + TS + Vitest，后端 Go。
+技术栈已确定：前端 Vue3 + Vite + TS + Vitest，后端 Node.js + Express + SQLite。
 
 ## 核心模块
 
@@ -34,10 +34,10 @@
 - 状态：Pinia（轻量）
 - UI 组件：待定（可考虑 Element Plus / Ant Design Vue / Naive UI）
 
-### 后端 (Go)
-- HTTP 框架：Gin（成熟简洁）
+### 后端 (Node.js)
+- HTTP 框架：Express（简洁灵活）
 - 数据库：SQLite（单设备，无需 MySQL/PostgreSQL）
-- ORM：GORM（支持 SQLite）
+- ORM：better-sqlite3（轻量，直接 SQL）
 - API 风格：RESTful JSON
 
 ### 目录结构
@@ -49,14 +49,13 @@
     /stores      # Pinia 状态
     /api         # API 调用
     /types       # TS 类型
-/server          # Go 后端
-  /cmd           # main.go 入口
-  /internal
-    /handler     # HTTP handlers
-    /model       # 数据模型
-    /repository  # 数据库操作
-    /service     # 业务逻辑
-  /pkg           # 共享工具
+/server          # Node.js 后端
+  /src
+    /routes      # 路由
+    /controllers # 控制器
+    /models      # 数据模型
+    /middleware  # 中间件
+    /utils       # 工具函数
 ```
 
 ---
@@ -136,11 +135,11 @@
 ## 实施计划
 
 ### Phase 1: 项目初始化
-- [ ] 初始化 Vue3 前端项目 (Vite + TS) - 使用 `npm create vite@latest client -- --template vue-ts`
-- [ ] 初始化 Go 后端项目 - 使用 `go mod init`
-- [ ] 删除模板工程中的冗余文件
-- [ ] 配置 CORS 和开发代理
-- [ ] 配置 SQLite 数据库连接
+- [x] 初始化 Vue3 前端项目 (Vite + TS) - 使用 `npm create vite@latest client -- --template vue-ts`
+- [x] 初始化 Node.js 后端项目 - 使用 `npm init`
+- [x] 删除模板工程中的冗余文件
+- [x] 配置 CORS 和开发代理
+- [x] 配置 SQLite 数据库连接
 
 ### Phase 2: 基础框架
 - [ ] 实现数据模型和数据库迁移

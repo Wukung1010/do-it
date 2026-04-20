@@ -16,26 +16,26 @@
 
 | 层级 | 要求 |
 |------|------|
-| 后端（Go） | 每个业务逻辑必须先写测试，再实现 |
+| 后端（Node.js） | 每个业务逻辑必须先写测试，再实现 |
 | 前端（Vue） | 核心组件必须写单元测试 |
 
 ### 测试框架
 
 | 语言 | 框架 |
 |------|------|
-| Go | `testing` 标准库 + `testify` |
+| Node.js | Jest 或 Vitest |
 | Vue/TS | Vitest |
 
 ---
 
 ## 代码风格
 
-### Go
+### Node.js
 
-- 使用 `gofmt` 格式化代码
-- 遵循 [Effective Go](https://go.dev/doc/effective_go) 规范
-- 错误处理：使用 `error` 类型，不得忽略
-- 命名：驼峰命名，公开 API 首字母大写
+- 使用 ESLint + Prettier 格式化代码
+- 遵循 [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) 规范
+- 错误处理：使用 `try/catch`，不得忽略错误
+- 命名：驼峰命名，文件使用 kebab-case
 
 ### TypeScript/Vue
 
@@ -83,17 +83,16 @@ fix(dimension): 修复时间范围校验问题
 
 ## 代码组织
 
-### Go 后端
+### Node.js 后端
 
 ```
 /server
-  /cmd           # main.go 入口
-  /internal
-    /handler     # HTTP handlers
-    /model       # 数据模型
-    /repository  # 数据库操作
-    /service     # 业务逻辑
-  /pkg           # 共享工具
+  /src
+    /routes      # 路由
+    /controllers # 控制器
+    /models      # 数据模型
+    /middleware  # 中间件
+    /utils       # 工具函数
 ```
 
 ### Vue 前端
@@ -118,7 +117,7 @@ fix(dimension): 修复时间范围校验问题
 | 层级 | CLI 命令 | 说明 |
 |------|----------|------|
 | 前端 | `npm create vite@latest client -- --template vue-ts` | Vue3 + TypeScript 项目 |
-| 后端 | `go mod init` + 手动创建目录结构 | Go 模块初始化 |
+| 后端 | `npm init` + 手动创建目录结构 | Node.js 模块初始化 |
 
 **初始化后处理**：
 1. 删除模板工程中的冗余文件（如默认的 HelloWorld 组件、示例文件等）
